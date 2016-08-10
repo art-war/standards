@@ -29,6 +29,41 @@ From the HTML5 spec:
 
 Read more about the lang attribute in [the spec](http://reference.sitepoint.com/html/lang-codes).
 
+IE compatibility mode
+============
+Internet Explorer supports the use of a document compatibility `<meta>` tag to specify what version of IE the page should be rendered as. Unless circumstances require otherwise, it's most useful to instruct IE to use the latest supported mode with edge mode.
+
+```html
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+```
+
+Character encoding
+============
+
+Quickly and easily ensure proper rendering of your content by declaring an explicit character encoding. When doing so, you may avoid using character entities in your HTML, provided their encoding matches that of the document (generally UTF-8).
+
+```html
+<head>
+  <meta charset="UTF-8">
+</head>
+```
+
+CSS and JavaScript includes
+============
+Per HTML5 spec, typically there is no need to specify a type when including CSS and JavaScript files as text/css and text/javascript are their respective defaults.
+```html
+<!-- External CSS -->
+<link rel="stylesheet" href="code-guide.css">
+
+<!-- In-document CSS -->
+<style>
+  /* ... */
+</style>
+
+<!-- JavaScript -->
+<script src="code-guide.js"></script>
+```
+
 Attributes and Tags 
 ============
 
@@ -39,6 +74,30 @@ For machines:
 
 For humans:
 `<a href="http://example.com/" title="Description Here">Example.com</a>`
+
+
+## Attribute order
+
+HTML attributes should come in this particular order for easier reading of code.
+
+- class
+- id, name
+- data-*
+- src, for, type, href, value
+- title, alt
+- role, aria-*
+Classes make for great reusable components, so they come first. Ids are more specific and should be used sparingly (e.g., for in-page bookmarks), so they come second.
+
+```html
+<a class="..." id="..." data-toggle="modal" href="#">
+  Example link
+</a>
+
+<input class="form-control" type="text">
+
+<img src="..." alt="...">
+```
+
 
 Quotes
 ============
@@ -88,4 +147,17 @@ Incorrect:
             </div>
         </div>
 <?php endif; ?>
+```
+
+Reducing markup
+============
+Whenever possible, avoid superfluous parent elements when writing HTML. Many times this requires iteration and refactoring, but produces less HTML. Take the following example:
+```html
+<!-- Not so great -->
+<span class="avatar">
+  <img src="...">
+</span>
+
+<!-- Better -->
+<img class="avatar" src="...">
 ```
